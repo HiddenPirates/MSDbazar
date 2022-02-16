@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1081740371675",
+    "project_id": "msdbazar-android-notification",
+    "storage_bucket": "msdbazar-android-notification.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1081740371675:android:4214fb184bdf57f9744efe",
+        "android_client_info": {
+          "package_name": "com.hiddenpirates.msdbazarcom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1081740371675-s6cng519rkreqqhd5lj8gbivgp72up2e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSeYjRXR08AjmSJXfKIdT7hGJGyPw_M-s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1081740371675-s6cng519rkreqqhd5lj8gbivgp72up2e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

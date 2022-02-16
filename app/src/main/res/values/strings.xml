@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MSDbazar</string>
+    <string name="error_message">Please check your internet connection.</string>
+</resources>
