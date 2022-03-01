@@ -36,7 +36,7 @@
         tools:targetApi="lollipop" />
 
 
-<!--  **********************Below Splash Screen Layout*************************  -->
+    <!--  **********************Below Splash Screen Layout*************************  -->
 
     <RelativeLayout
         android:id="@+id/splashScreenLayout"
@@ -80,6 +80,6 @@
 
     </RelativeLayout>
 
-<!--  **********************************************************  -->
+    <!--  **********************************************************  -->
 
 </RelativeLayout>

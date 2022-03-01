@@ -40,9 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
     private WebView webview;
     private String WEBSITE = "https://msdbazar.com";
-    private RelativeLayout splashScreenLayout;
+    private RelativeLayout mainViewLayout, splashScreenLayout;
     private boolean doubleBackPressed = false;
-    private RelativeLayout mainViewLayout;
     private final int UPDATE_REQUEST_CODE = 8348;
     SwipeRefreshLayout swipeRefreshLayout;
     ProgressBar spinner;
@@ -56,7 +55,24 @@ public class MainActivity extends AppCompatActivity {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-//_____________________________________________________
+//_______________________________________________________________________________
+
+        AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(this);
+        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+
+                try {
+                    appUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.IMMEDIATE, this, UPDATE_REQUEST_CODE);
+                }
+                catch (IntentSender.SendIntentException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+//_______________________________________________________________________________
+
         Intent intent = getIntent();
         String action = intent.getAction();
         Uri url = intent.getData();
@@ -64,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         if (Intent.ACTION_VIEW.equals(action) && url != null){
             WEBSITE = url.toString();
         }
-//_____________________________________________________
+//_______________________________________________________________________________
 
 
         mainViewLayout = findViewById(R.id.mainView);
@@ -105,31 +121,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         swipeRefreshLayout.setOnRefreshListener(() -> webview.reload());
-//        -------------------------------------------------------
-
-//--------------------------------------------------------------------------
-
-        AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(this);
-        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
-
-        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
-
-                try {
-                    appUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.IMMEDIATE, this, UPDATE_REQUEST_CODE);
-                }
-                catch (IntentSender.SendIntentException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-//--------------------------------------------------------------------------
+//_______________________________________________________________________________
 
     }
 
 
     public class CustomWebViewClient extends WebViewClient{
-
 
         @SuppressLint("WebViewClientOnReceivedSslError")
         @Override
@@ -148,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
-             super.onPageStarted(view, url, favicon);
+            super.onPageStarted(view, url, favicon);
         }
 
         @Override
@@ -203,13 +200,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//----------------------------------------------------------------------------
-/* Retry Loading the page */
+//________________________________________________________________________________
+    /* Retry Loading the page */
     public void tryAgain(View v){
         recreate();
     }
 
-//----------------------------------------------------------------------------
+//________________________________________________________________________________
+
     @Override
     public void onBackPressed() {
         if(webview.canGoBack()) {
