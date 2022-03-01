@@ -56,6 +56,17 @@ public class MainActivity extends AppCompatActivity {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
+//_____________________________________________________
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        Uri url = intent.getData();
+
+        if (Intent.ACTION_VIEW.equals(action) && url != null){
+            WEBSITE = url.toString();
+        }
+//_____________________________________________________
+
+
         mainViewLayout = findViewById(R.id.mainView);
         splashScreenLayout = findViewById(R.id.splashScreenLayout);
         webview = findViewById(R.id.webView);

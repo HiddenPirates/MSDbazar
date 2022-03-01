@@ -18,15 +18,30 @@
         android:theme="@style/Theme.MSDbazar"
         android:hardwareAccelerated="true"
         tools:targetApi="m"
-        android:fullBackupContent="true">
+        android:fullBackupContent="true"
+        tools:ignore="DataExtractionRules">
         <activity
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:hardwareAccelerated="true"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+
+                <data android:host="msdbazar.com" />
+                <data android:host="www.msdbazar.com" />
+
             </intent-filter>
         </activity>
     </application>
